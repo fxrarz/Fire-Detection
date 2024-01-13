@@ -1,8 +1,8 @@
 
 import cv2
 import numpy as np
-import os
 
+message = "no fire"
 cam = cv2.VideoCapture(0)
 while 1:
     ret, frame = cam.read()
@@ -24,12 +24,17 @@ while 1:
     no_red = cv2.countNonZero(mask)
 
     if int(no_red) > 1500:
-        print('fire')
+        message = "fire"
+        print(message)
     else:
-        print('no fire')
+        if message != "no fire":
+            message = "no fire"
+            print(message)
 
     cv2.imshow("output", output)
-    cv2.waitKey(1)
+
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
 
 cv2.destroyAllWindows()
 cam.release()

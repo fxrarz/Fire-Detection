@@ -3,21 +3,9 @@ import cv2
 import numpy as np
 import os
 
-file_path = "images/burning-wood-ignites-vibrant-campfire-nature-generated-by-ai_24640-87948.jpg"
-
-img_files = []
-for im in os.listdir('images/'):
-    img_files.append(os.path.join('images/', im))
-
-print(img_files)
-img = enumerate(img_files)
-def get_image():
-    im = cv2.imread(next(img)[1])
-    # print(im)
-    return im
-
-for i in img_files:
-    frame = get_image()
+cam = cv2.VideoCapture(0)
+while 1:
+    ret, frame = cam.read()
 
     frame = cv2.resize(frame, (960, 540))
 
@@ -41,6 +29,7 @@ for i in img_files:
         print('no fire')
 
     cv2.imshow("output", output)
-    cv2.waitKey(0)
+    cv2.waitKey(1)
 
 cv2.destroyAllWindows()
+cam.release()

@@ -1,0 +1,103 @@
+[
+    {
+        "id": "713a2714b0f46d2e",
+        "type": "tab",
+        "label": "Fire Detection Dashboard",
+        "disabled": false,
+        "locked": true,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "952fafdef7daf8e8",
+        "type": "ui_text",
+        "z": "713a2714b0f46d2e",
+        "group": "290c29e3e8a867a4",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Alert",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 850,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "abbcd60c6f3eecc0",
+        "type": "exec",
+        "z": "713a2714b0f46d2e",
+        "command": "python3 /home/whitebot/Workspace/Fire-Detection/fire-detector.py",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "true",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 520,
+        "y": 200,
+        "wires": [
+            [
+                "952fafdef7daf8e8"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "e83eb6eee260b894",
+        "type": "inject",
+        "z": "713a2714b0f46d2e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 200,
+        "wires": [
+            [
+                "abbcd60c6f3eecc0"
+            ]
+        ]
+    },
+    {
+        "id": "290c29e3e8a867a4",
+        "type": "ui_group",
+        "name": "Notification",
+        "tab": "643f80d7553f1a2b",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "643f80d7553f1a2b",
+        "type": "ui_tab",
+        "name": "Fire Detection",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]

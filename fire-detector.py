@@ -1,11 +1,23 @@
 
 import cv2
 import numpy as np
+import serial
+import time
+import sys
 
 message = "no fire"
 cam = cv2.VideoCapture(0)
-while 1:
+ser = serial.Serial('/dev/ttyUSB0', 115200, timeout=1)
+ser.write(b"0!\n")
+time.sleep(1)
+print(message)
+
+for i in range(1000):
     ret, frame = cam.read()
+
+    if not ret:
+        print('Image not found')
+        exit()
 
     frame = cv2.resize(frame, (960, 540))
 
@@ -23,13 +35,20 @@ while 1:
 
     no_red = cv2.countNonZero(mask)
 
-    if int(no_red) > 1500:
-        message = "fire"
-        print(message)
-    else:
-        if message != "no fire":
-            message = "no fire"
+    if int(no_red) > 10000:
+        if message != "fire":
+            message = "fire"
+            ser.write(b"1\n")
+            time.sleep(1)
             print(message)
+            sys.stdout.flush()
+    else:
+        if message != "no fire":  
+            message = "no fire"
+            ser.write(b"0!\n")
+            time.sleep(1)
+            print(message)
+            sys.stdout.flush()
 
     cv2.imshow("output", output)
 

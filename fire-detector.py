@@ -32,13 +32,13 @@ import os
 
 
 # video = cv2.VideoCapture(0) # If you want to use webcam use Index like 0,1.
-file_path = "images/burning-wood-ignites-vibrant-campfire-nature-generated-by-ai_24640-87948.jpg"
+# file_path = "images/burning-wood-ignites-vibrant-campfire-nature-generated-by-ai_24640-87948.jpg"
 
 img_files = []
 for im in os.listdir('images/'):
     img_files.append(os.path.join('images/', im))
 
-print(img_files)
+# print(img_files)
 img = enumerate(img_files)
 def get_image():
     im = cv2.imread(next(img)[1])
